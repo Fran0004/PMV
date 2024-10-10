@@ -1,25 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://bxj6aw36yr5v0"]
+[gd_scene load_steps=32 format=3 uid="uid://bxj6aw36yr5v0"]
 
-[ext_resource type="Texture2D" uid="uid://cqv0ttan4wl2q" path="res://assets/sprites/knight.png" id="1_6kkms"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_tbkgc"]
 [ext_resource type="Texture2D" uid="uid://c8oqxmtl8eeiu" path="res://assets/sprites/calvo.png" id="2_ktdu5"]
 [ext_resource type="Texture2D" uid="uid://dnqlcldmo037" path="res://assets/sprites/khame segunda fase.png" id="3_vo1ii"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kqn23"]
-atlas = ExtResource("1_6kkms")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p4a5e"]
-atlas = ExtResource("1_6kkms")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d862g"]
-atlas = ExtResource("1_6kkms")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w86h8"]
-atlas = ExtResource("1_6kkms")
-region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86f37"]
 atlas = ExtResource("2_ktdu5")
@@ -129,23 +112,6 @@ region = Rect2(1920, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kqn23")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p4a5e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d862g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w86h8")
-}],
-"loop": true,
-"name": &"aa",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_86f37")
 }, {
 "duration": 1.0,
@@ -177,7 +143,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
