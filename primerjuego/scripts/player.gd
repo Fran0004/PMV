@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	# He quitado la funcion is_on_floor() que sale todo el rato en false
-	if Input.is_action_just_pressed("Saltar"):
+	if Input.is_action_just_pressed("Saltar") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.

@@ -237,7 +237,6 @@ animations = [{
 size = Vector2(10.5, 21.25)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(0, 2)
 script = ExtResource("1_tbkgc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -1358,7 +1358,6 @@ _data = {
 position = Vector2(52, 14)
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(-1, 0)
 tile_set = SubResource("TileSet_fvuj0")
 format = 2
 
