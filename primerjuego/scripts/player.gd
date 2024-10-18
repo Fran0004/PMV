@@ -5,6 +5,7 @@ const JUMP_VELOCITY = -250.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animated_player = $"../AnimationPlayer"
+@onready var Energy = preload("res://scens/energy.tscn")
 
 var procesing = false
 
@@ -14,7 +15,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	# He quitado la funcion is_on_floor() que sale todo el rato en false
 	if Input.is_action_just_pressed("Saltar") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
@@ -37,9 +37,8 @@ func _physics_process(delta: float) -> void:
 		procesing = true
 		print("super ataque")
 		animated_player.play("zoom_in")
-	#if  Input.is_action_just_pressed("ataque"):
-		#var energy_instance = energy_instance.instance() 
-		
+	if Input.is_action_just_pressed("ataque"):
+		shoot()
 		
 
 func play_animation_super_attack() -> void:
@@ -52,3 +51,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "kame_attack":
 		animated_player.play("zoom_out")
 		procesing = false
+		
+func shoot():
+	# Accede al collider que quieres usar como punto de origen del disparo
+	var collider = $CollisionShape2D
+
+	var b = Energy.instantiate()  # Instancia el proyectil
+	get_parent().add_child(b)  # Añade el proyectil al padre del jugador
+
+	# Usa la posición global del collider para el proyectil
+	b.global_position = collider.global_position
