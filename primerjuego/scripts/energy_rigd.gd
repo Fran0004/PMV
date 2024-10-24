@@ -1,18 +1,20 @@
 extends RigidBody2D
 
 var moving = true
-var direction: int = 1
+var direction: int 
 var force : float = 5
-var launch_direction = Vector2()
+var launch_direction = Vector2(2000*force,-2000*force)
 var colisionado = false
+var diley : float = 2
 
 func _ready() -> void:
 	if direction == 1:
-		launch_direction = Vector2(1,0)
+		launch_direction = Vector2(2000*force,-2000*force)
 	elif  direction == -1:
-		launch_direction = Vector2(1, -0.5)
+		launch_direction = Vector2(-2000*force,-2000*force)
 		
-	$".".apply_central_force( Vector2(2000*force,-2000*force))
+		
+	$".".apply_central_force( launch_direction)
 
 func set_direction(dir: int) -> void:
 	direction = dir

@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxj6aw36yr5v0"]
+[gd_scene load_steps=30 format=3 uid="uid://bxj6aw36yr5v0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_tbkgc"]
 [ext_resource type="Texture2D" uid="uid://c8oqxmtl8eeiu" path="res://assets/sprites/calvo.png" id="2_ktdu5"]
+[ext_resource type="Texture2D" uid="uid://k2xc3rp26obl" path="res://assets/sprites/salto_calvo.png" id="4_0wydq"]
 [ext_resource type="Texture2D" uid="uid://dmo8rucwgd81p" path="res://assets/sprites/andar calvo.png" id="5_j2pbi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86f37"]
@@ -68,6 +69,34 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("5_j2pbi")
 region = Rect2(192, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnm46"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbep5"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcvfj"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7wjt"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epsao"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o87fc"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5a5m"]
+atlas = ExtResource("4_0wydq")
+region = Rect2(192, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_k0pqc"]
 animations = [{
 "frames": [{
@@ -126,7 +155,39 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 6.0
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnm46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbep5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcvfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7wjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epsao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o87fc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5a5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epsao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epsao")
+}],
+"loop": false,
+"name": &"salto",
+"speed": 20.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4p3ip"]
@@ -141,7 +202,7 @@ script = ExtResource("1_tbkgc")
 position = Vector2(0, -4)
 scale = Vector2(0.96875, 0.921875)
 sprite_frames = SubResource("SpriteFrames_k0pqc")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -9,16 +9,21 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if vida == 0:
+	if vida <= 0:
 		queue_free()
 
-
 func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("rock") or area.is_in_group("energy"):
+	if area.is_in_group("energy"):
 		flash_enemy()
 		vida -= 1
-		
+
 func flash_enemy() -> void:
 	var tween = create_tween()
 	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 0, 0), 0.1)  # Rojo
 	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 1, 1), 0.1) 	
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("rock") :
+		flash_enemy()
+		vida -= 2

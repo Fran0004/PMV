@@ -1,35 +1,49 @@
 extends CharacterBody2D
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -300.0
+var animacionDeSaltoUnaVez = true
 var directionParaProyectil : float = 0
+var timer
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animated_player = $"../AnimationPlayer"
 @onready var Energy = preload("res://scens/energy_rigid_body_2d.tscn")
 @onready var EnergyRecto = preload("res://scens/energy.tscn")
-
 var procesing = false
 
+func _ready() -> void:
+	timer = Timer.new()
+	timer.one_shot = true
+	add_child(timer) 
+	timer.connect("timeout",Callable(self, "_on_timer_timeout") )  # Conectar la señal
+	
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 	# Handle jump.
 	if Input.is_action_just_pressed("Saltar") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+		animacionDeSaltoUnaVez = false
 	var direction := Input.get_axis("ui_left", "ui_right")
-	directionParaProyectil = direction
+	
 	if direction>0:
 		animated_sprite.flip_h = false
+		directionParaProyectil = 1
 	elif  direction < 0:
-		animated_sprite.flip_h= true	
-	if direction == 0:
-		animated_sprite.play("idle")
+		animated_sprite.flip_h= true
+		directionParaProyectil = -1	
+		
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("run")
 	else:
-		animated_sprite.play("run")
-	
+		if animacionDeSaltoUnaVez == false:
+			animated_sprite.play("salto")
+			animacionDeSaltoUnaVez = true
+		
 	
 	if direction:
 		velocity.x = direction * SPEED
@@ -46,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		shoot(Energy)
 	if Input.is_action_just_pressed("ataque recto"):
 		shoot(EnergyRecto)
-		
+
 func play_animation_super_attack() -> void:
 	animated_sprite.play("kame_attack")
 func play_animation_idle() -> void:
@@ -60,9 +74,17 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 func shoot(e):
 	# Accede al collider que quieres usar como punto de origen del disparo
-	var collider = $CollisionShape2D
-	var b = e.instantiate()  # Instancia el proyectil
-	b.set_direction(directionParaProyectil)
-	get_parent().add_child(b)  # Añade el proyectil al padre del jugador
+	if timer.is_stopped():
+			
+		var collider = $CollisionShape2D
+		var b = e.instantiate()  # Instancia el proyectil
+		b.set_direction(directionParaProyectil)
+		get_parent().add_child(b)  # Añade el proyectil al padre del jugador
 
-	b.global_position = collider.global_position
+		b.global_position = collider.global_position
+		print(b.diley)
+		timer.wait_time = b.diley
+		timer.start()
+
+			
+		

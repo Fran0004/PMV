@@ -3,14 +3,17 @@ extends Area2D
 var speed = 300
 var moving = true
 var direction: int = 1
+var diley : float = 1
 
 func _physics_process(delta: float) -> void:
 	if moving:
 		if direction < 0:
 			position += -transform.x * speed * delta
 			$particulasMovimiento.rotate(0)
+			$Sprite2D.flip_h = true
 		else:
 			$particulasMovimiento.rotate(90)
+			$Sprite2D.flip_h = false
 			position += transform.x * speed * delta
 	else:
 		$particulasMovimiento.hide()
