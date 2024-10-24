@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1r271wcwgex6"]
+
+[ext_resource type="Texture2D" uid="uid://wh86wnemjcnu" path="res://assets/sprites/roca_destruirse.png" id="1_bc8e5"]
+[ext_resource type="Script" path="res://scripts/energy_rigd.gd" id="1_lf6fy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsuic"]
+atlas = ExtResource("1_bc8e5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xooag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsuic")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_c8pms"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_478qc"]
+curve = SubResource("Curve_c8pms")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wxbws"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 63.84
+initial_velocity_max = 107.17
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_478qc")
+color = Color(0.45, 0.2475, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l573f"]
+size = Vector2(9, 9)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+script = ExtResource("1_lf6fy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xooag")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+scale = Vector2(0.597522, 1.76948)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wxbws")
+one_shot = true
+explosiveness = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_l573f")
