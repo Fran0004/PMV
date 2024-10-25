@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
+var SPEED = 200.0
+const SPEED_BEFORE_JUMP = 100
 const JUMP_VELOCITY = -300.0
 var animacionDeSaltoUnaVez = true
 var directionParaProyectil : float = 0
@@ -26,6 +27,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Saltar") and is_on_floor():
 		if animacionDeSaltoUnaVez:
 			anim_tree.set("parameters/salto 2/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			SPEED = SPEED_BEFORE_JUMP
 			animacionDeSaltoUnaVez = false
 	var direction := Input.get_axis("ui_left", "ui_right")
 	
@@ -73,6 +75,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func jump() ->void:
 	velocity.y = JUMP_VELOCITY
 	animacionDeSaltoUnaVez = true
+	SPEED = 200
 	
 func shoot(e):
 	# Accede al collider que quieres usar como punto de origen del disparo
