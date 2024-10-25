@@ -187,7 +187,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"salto",
-"speed": 20.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4p3ip"]
@@ -202,8 +202,10 @@ script = ExtResource("1_tbkgc")
 position = Vector2(0, -4)
 scale = Vector2(0.96875, 0.921875)
 sprite_frames = SubResource("SpriteFrames_k0pqc")
-animation = &"run"
+animation = &"salto"
 autoplay = "idle"
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -3)

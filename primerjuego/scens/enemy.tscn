@@ -60,6 +60,7 @@ sprite_frames = SubResource("SpriteFrames_uwi6x")
 autoplay = "default"
 
 [node name="KillZone" parent="." instance=ExtResource("3_bamx7")]
+position = Vector2(-2, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 position = Vector2(2, 5)
