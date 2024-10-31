@@ -27,6 +27,7 @@ func _on_body_entered(body: Node) -> void:
 	if !body.is_in_group("player") and !colisionado:
 		print(body.name)
 		$AnimatedSprite2D.hide()
+		$CollisionShape2D.queue_free()
 		moving = false
 		colisionado = true
 		$GPUParticles2D.emitting = true 

@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://cici46ce33gbc"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_2rvvs"]
+[ext_resource type="FontFile" uid="uid://cvl57nf5cqge2" path="res://assets/fonts/alagard.ttf" id="1_bfe1d"]
+[ext_resource type="Texture2D" uid="uid://d0hjipc1fipw6" path="res://assets/sprites/Background_2.png" id="2_yjus6"]
+[ext_resource type="Texture2D" uid="uid://c4w0nq6ydghk0" path="res://assets/sprites/Background_1.png" id="3_sddu1"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="5_l2i0i"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2rvvs")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_yjus6")
+
+[node name="fondo" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="fondo"]
+visible = false
+position = Vector2(575, 317)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("2_yjus6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="fondo"]
+visible = false
+position = Vector2(582.5, 321.5)
+scale = Vector2(3.69105, 2.77515)
+texture = ExtResource("3_sddu1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.0
+offset_top = -111.0
+offset_right = -23.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.3583, 2.13686)
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0.423529, 0.780392, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("1_bfe1d")
+theme_override_font_sizes/font_size = 50
+text = "Titulo"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.515794, 0.67253, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_bfe1d")
+theme_override_font_sizes/font_size = 25
+text = "Jugar"
+script = ExtResource("5_l2i0i")
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Salir"
+script = ExtResource("5_l2i0i")
+
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_exit_pressed"]

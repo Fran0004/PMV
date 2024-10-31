@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cctcdchu4bg2f"]
+
+[ext_resource type="Script" path="res://scripts/enemie_detected.gd" id="1_afn4h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6siu"]
+radius = 90.4078
+
+[node name="Area2D" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_afn4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.365013, 0.314372)
+shape = SubResource("CircleShape2D_l6siu")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

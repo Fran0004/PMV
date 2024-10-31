@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bxj6aw36yr5v0"]
+[gd_scene load_steps=41 format=3 uid="uid://bxj6aw36yr5v0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_tbkgc"]
 [ext_resource type="Texture2D" uid="uid://c8oqxmtl8eeiu" path="res://assets/sprites/calvo.png" id="2_ktdu5"]
@@ -191,7 +191,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4p3ip"]
-size = Vector2(10.5, 21.25)
+size = Vector2(7.25, 19.625)
 
 [sub_resource type="Animation" id="Animation_1oxwn"]
 length = 1.9
@@ -259,7 +259,7 @@ tracks/0/path = NodePath("../AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-2.23517e-08, 0.0666666, 0.133333, 0.2, 0.3, 0.4, 0.5),
+"times": PackedFloat32Array(-2.23517e-08, 0.0333333, 0.1, 0.133333, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [1, 2, 3, 4, 5, 6, 7]
@@ -283,7 +283,7 @@ tracks/2/path = NodePath("..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.133333),
+"times": PackedFloat32Array(0.0333333),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [&"jump"],
@@ -321,7 +321,7 @@ break_loop_at_end = true
 animation = &"salto"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iijfr"]
-graph_offset = Vector2(-411.231, -8.92731)
+graph_offset = Vector2(107.074, 149.636)
 nodes/Transition/node = SubResource("AnimationNodeTransition_2pdvf")
 nodes/Transition/position = Vector2(680, 140)
 nodes/idle/node = SubResource("AnimationNodeAnimation_rudym")
@@ -335,6 +335,9 @@ nodes/salto/position = Vector2(640, 360)
 "nodes/salto 2/position" = Vector2(880, 180)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"run", &"output", 0, &"salto 2", &"salto 2", 0, &"Transition", &"salto 2", 1, &"salto"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t65m"]
+size = Vector2(7, 20)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, 2)
 collision_layer = 2
@@ -344,12 +347,12 @@ script = ExtResource("1_tbkgc")
 position = Vector2(0, -4)
 scale = Vector2(0.96875, 0.921875)
 sprite_frames = SubResource("SpriteFrames_k0pqc")
-animation = &"salto"
+animation = &"idle"
 autoplay = "idle"
-frame = 1
+frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -4)
+position = Vector2(2.625, -3.1875)
 shape = SubResource("RectangleShape2D_4p3ip")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -369,4 +372,14 @@ parameters/Transition/current_index = 0
 "parameters/salto 2/internal_active" = false
 "parameters/salto 2/request" = 0
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -4)
+scale = Vector2(1.28, 0.719999)
+shape = SubResource("RectangleShape2D_8t65m")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

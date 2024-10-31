@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
+var vidaPlayer = 5
 var SPEED = 200.0
-const SPEED_BEFORE_JUMP = 100
+const SPEED_BEFORE_JUMP = 65
 const JUMP_VELOCITY = -300.0
 var animacionDeSaltoUnaVez = true
 var directionParaProyectil : float = 0
@@ -91,5 +92,17 @@ func shoot(e):
 		timer.wait_time = b.diley
 		timer.start()
 
-			
-		
+func hit() ->void:
+	var tween = create_tween()
+	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 0, 0), 0.1)  # Rojo
+	tween.tween_property($AnimatedSprite2D, "modulate", Color(1, 1, 1), 0.1) 	
+	vidaPlayer -= 1	
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	print("enter to area detected")
+	if area.is_in_group("EnemieEnergy") or area.is_in_group("enemie"):
+		print("hit")
+		hit()
+		if vidaPlayer <=0:
+			get_tree().reload_current_scene()
